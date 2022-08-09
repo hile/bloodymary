@@ -1,0 +1,5 @@
+Date: 8. August 2022 at 10.12
+Systolic: 115
+Diastolic: 74
+Pulse: 65
+SpanishInquisition:

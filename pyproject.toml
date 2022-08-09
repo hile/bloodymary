@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "bloodymary"
+version = "0.2"
+description = "Utility for parsing and processing blood pressure measurements"
+authors = ["Ilkka Tuohela <hile@iki.fi>"]
+license = "PSF"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+cli-toolkit = "^2.1.5"
+
+[tool.poetry.dev-dependencies]
+coverage = "^6"
+flake8 = "^4"
+flake8-bugbear = "^21"
+flake8-quotes = "^3"
+pycodestyle = "^2"
+pyflakes = "^2"
+pylint = "^2"
+pytest = "^6"
+tox = "^3"
+
+[build-system]
+requires = ["poetry-core>=1.0.8"]
+build-backend = "poetry.core.masonry.api"

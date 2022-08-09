@@ -1,0 +1,24 @@
+Date: 8. August 2022 at 10.12
+Systolic: 115
+Diastolic: 74
+Pulse: 65
+Notes:
+
+Date: 8. August 2022 at 10.10
+Systolic: 120
+Diastolic: 73
+Pulse: 62
+Notes:
+
+Date: 8. August 2022 at 0.22
+Systolic: 109
+Diastolic: 72
+Pulse: 60
+Notes:
+
+
+Date: 8. August 2022 at 0.20
+Systolic: 115
+Diastolic: 75
+Pulse: 60
+Notes:
