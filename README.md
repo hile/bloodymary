@@ -1,3 +1,6 @@
+![Unit Tests](https://github.com/hile/bloodymary/actions/workflows/unittest.yml/badge.svg)
+![Style Checks](https://github.com/hile/bloodymary/actions/workflows/lint.yml/badge.svg)
+
 # Bloodymary blood pressure data loader
 
 This module loades blood pressure data for viewing.
