@@ -1,17 +1,57 @@
 """
 Unit test configuration for bloodymary module
 """
+import os
 
 from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
 
+from bloodymary.constants import BLOODYMARY_FILE_FORMAT_ENV_VAR, FileFormat
 from bloodymary.measurement import Measurement
 
 
 MOCK_DATA = Path(__file__).parent.joinpath('mock')
 EMPTY_FILE = MOCK_DATA.joinpath('formats/empty_file.txt')
+
+INVALID_FILE_FORMAT_NAME = 'this-is-wrong'
+
+
+@pytest.fixture
+def no_file_format_env(monkeypatch):
+    """
+    Mock environment without file format environment variable
+    """
+    if BLOODYMARY_FILE_FORMAT_ENV_VAR in os.environ:
+        monkeypatch.delenv(BLOODYMARY_FILE_FORMAT_ENV_VAR)
+    yield None
+
+
+@pytest.fixture
+def invalid_file_format_env(monkeypatch):
+    """
+    Mock environment with invalid file format environment variable
+    """
+    monkeypatch.setenv(BLOODYMARY_FILE_FORMAT_ENV_VAR, INVALID_FILE_FORMAT_NAME)
+    yield INVALID_FILE_FORMAT_NAME
+
+
+@pytest.fixture
+def valid_file_format_env(monkeypatch):
+    """
+    Mock environment with invalid file format environment variable
+    """
+    monkeypatch.setenv(BLOODYMARY_FILE_FORMAT_ENV_VAR, FileFormat.IOS_BLOOD_PRESSURE_EXPORT.value)
+    yield FileFormat.IOS_BLOOD_PRESSURE_EXPORT.value
+
+
+@pytest.fixture
+def valid_file_format_values():
+    """
+    Mock environment with invalid file format environment variable
+    """
+    yield [file_format.value for file_format in FileFormat]
 
 
 @pytest.fixture

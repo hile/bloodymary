@@ -6,14 +6,8 @@ from collections.abc import MutableSequence
 from datetime import datetime
 from typing import Optional, Sequence
 
-from bloodymary.measurement import Measurement
-
-DEFAULT_DATE_FORMATS = (
-    '%Y%m%dT%H%M%S',
-    '%Y-%m-%d',
-    '%Y%m%d',
-)
-DEFAULT_FILE_ENCODING = 'utf-8'
+from ..constants import DEFAULT_DATE_FORMATS
+from ..measurement import Measurement
 
 
 class BloodPressureLogBaseClass(MutableSequence):
@@ -60,12 +54,6 @@ class BloodPressureLogBaseClass(MutableSequence):
         """
         self.__items__ = []
 
-    def insert(self, index, value) -> None:
-        """
-        insert item to specific index
-        """
-        self.__items__.insert(index, value)
-
     def __getitem__(self, index) -> Measurement:
         """
         Get specified record by index
@@ -86,6 +74,21 @@ class BloodPressureLogBaseClass(MutableSequence):
             except ValueError:
                 pass
         raise ValueError(f'Invalid date: {value}')
+
+    @property
+    def last(self) -> Optional[Measurement]:
+        """
+        Return last measurement or None if no data is loaded
+        """
+        if len(self):
+            return self[-1]
+        return None
+
+    def insert(self, index, value) -> None:
+        """
+        insert item to specific index
+        """
+        self.__items__.insert(index, value)
 
     def sort(self) -> None:
         """

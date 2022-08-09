@@ -25,11 +25,12 @@ def test_formats_base_class_add_remove(mock_measurement, mock_minimal_measuremen
     """
     obj = BloodPressureLogBaseClass()
     assert len(obj) == 0
-    obj.insert(0, mock_measurement)
+    assert obj.last is None
 
+    obj.insert(0, mock_measurement)
     assert len(obj) == 1
-    obj.insert(0, mock_measurement)
 
+    obj.insert(0, mock_measurement)
     assert len(obj) == 2
     assert obj[-1] == mock_measurement
 
@@ -38,6 +39,8 @@ def test_formats_base_class_add_remove(mock_measurement, mock_minimal_measuremen
 
     del obj[0]
     assert len(obj) == 1
+
+    assert obj.last == mock_measurement
 
 
 def test_formats_base_class_sorting(mock_measurement, mock_minimal_measurement):

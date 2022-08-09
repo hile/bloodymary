@@ -4,8 +4,10 @@ Parser for records from IoS Blood Pressure app exports
 from typing import Optional, Sequence
 from pathlib import Path
 
+from ..constants import DEFAULT_DATE_FORMATS, DEFAULT_FILE_ENCODING
 from ..measurement import Measurement
-from .base import BloodPressureLogBaseClass, DEFAULT_FILE_ENCODING, DEFAULT_DATE_FORMATS
+
+from .base import BloodPressureLogBaseClass
 
 INT_FIELDS = (
     'diastolic',
@@ -38,7 +40,7 @@ class IosBloodPressureExportFile(BloodPressureLogBaseClass):
         """
         self.clear()
         record = {}
-        path = Path(path)
+        path = Path(path).expanduser().resolve()
         if not path.is_file():
             raise ValueError(f'No such file: {path}')
 
