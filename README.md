@@ -99,13 +99,32 @@ bp.records.load('~/Downloads/text-ios-records.txt')
 dataframe = bp.get_dataframe()
 ```
 
-Example to get a pandas Dataframe for last week's blood pressure data records:
+Example to get a pandas Dataframe for last 2 weeks blood pressure data records,
+creating a bar graph with the diagram and viewing it:
 
 ```python
 from datetime import datetime, timedelta
 from bloodymary.formats import BloodPressureData
+import matplotlib.pyplot as mp
+
 bp = BloodPressureData('ios-blood-pressure')
 bp.records.load('~/Downloads/text-ios-records.txt')
-limit = datetime.now() - timedelta(days=7)
-dataframe = bp.get_dataframe(bp.records.filter(start_time=limit))
+
+# Get last 2 weeks records and max systolic rate for plotting
+filtered = bp.records.filter(start_time=datetime.now() - timedelta(days=14))
+max_systolic = max(measurement.systolic for measurement in filtered) + 20
+
+dataframe = bp.get_dataframe(filtered)
+dataframe.plot(
+    x='Time',
+    y=['Systolic', 'Diastolic', 'Pulse'],
+    kind='bar',
+    grid=True,
+    rot=30,
+    yticks=list(range(0, max_systolic, 5)),
+    position=0.9,
+    figsize=(15, 10),
+)
+# View the plot in a window
+mp.show()
 ```

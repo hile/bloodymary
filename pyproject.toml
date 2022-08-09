@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bloodymary"
-version = "0.2"
+version = "0.3.0"
 description = "Utility for parsing and processing blood pressure measurements"
 authors = ["Ilkka Tuohela <hile@iki.fi>"]
 license = "PSF"
