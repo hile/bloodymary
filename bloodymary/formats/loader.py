@@ -42,16 +42,19 @@ class BloodPressureData:
         self.file_format = file_format
         self.records = FILE_FORMAT_LOADERS[self.file_format]()
 
-    @property
-    def dataframe(self):
+    def get_dataframe(self, records=None):
         """
         Return a pandas dataframe for the measurement records
+
+        If on records are specified, self.records is used instead
         """
+        if records is None:
+            records = self.records
         data = {}
         for column in DATAFRAME_COLUMNS:
             attr = column.lower()
             data[column] = [
                 getattr(measurement, attr)
-                for measurement in self.records
+                for measurement in records
             ]
         return pandas.DataFrame(data, columns=DATAFRAME_COLUMNS)

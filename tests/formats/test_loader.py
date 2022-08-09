@@ -101,7 +101,24 @@ def test_blood_pressure_data_loader_dataframe_generate(no_file_format_env):
     loader.records.load(VALID_IOS_DATA_FILE)
     assert len(loader.records) == VALID_IOS_DATA_RECORD_COUNT
 
-    dataframe = loader.dataframe
+    dataframe = loader.get_dataframe()
     assert list(dataframe.columns) == list(DATAFRAME_COLUMNS)
     for column in DATAFRAME_COLUMNS:
         assert len(dataframe[column]) == VALID_IOS_DATA_RECORD_COUNT
+
+
+# pylint: disable=unused-argument
+def test_blood_pressure_data_loader_dataframe_generate_filtered(no_file_format_env):
+    """
+    Test generating a pandas dataframe from test data with filtered record set
+    """
+    loader = BloodPressureData(FileFormat.IOS_BLOOD_PRESSURE_EXPORT)
+    loader.records.load(VALID_IOS_DATA_FILE)
+    assert len(loader.records) == VALID_IOS_DATA_RECORD_COUNT
+
+    # Filter by date picks last 2 records from the set
+    filtered_records_count = 2
+    dataframe = loader.get_dataframe(loader.records.filter(start_time=loader.records[-2].time))
+    assert list(dataframe.columns) == list(DATAFRAME_COLUMNS)
+    for column in DATAFRAME_COLUMNS:
+        assert len(dataframe[column]) == filtered_records_count

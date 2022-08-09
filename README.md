@@ -96,5 +96,16 @@ Example to get a pandas Dataframe from a blood pressure data file:
 from bloodymary.formats import BloodPressureData
 bp = BloodPressureData('ios-blood-pressure')
 bp.records.load('~/Downloads/text-ios-records.txt')
-dataframe = bp.dataframe
+dataframe = bp.get_dataframe()
+```
+
+Example to get a pandas Dataframe for last week's blood pressure data records:
+
+```python
+from datetime import datetime, timedelta
+from bloodymary.formats import BloodPressureData
+bp = BloodPressureData('ios-blood-pressure')
+bp.records.load('~/Downloads/text-ios-records.txt')
+limit = datetime.now() - timedelta(days=7)
+dataframe = bp.get_dataframe(bp.records.filter(start_time=limit))
 ```
