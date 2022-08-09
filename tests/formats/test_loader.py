@@ -3,11 +3,12 @@ Unit tests for bloodymary.formats.loader module
 """
 import pytest
 
+from bloodymary.constants import DATAFRAME_COLUMNS
 from bloodymary.exceptions import ConfigurationError
 from bloodymary.formats import BloodPressureData
 from bloodymary.formats.loader import FileFormat, get_file_format
 
-from ..conftest import INVALID_FILE_FORMAT_NAME
+from ..conftest import INVALID_FILE_FORMAT_NAME, VALID_IOS_DATA_FILE, VALID_IOS_DATA_RECORD_COUNT
 
 
 # pylint: disable=unused-argument
@@ -89,3 +90,18 @@ def test_blood_pressure_data_loader_valid_explicit_file_format(no_file_format_en
     """
     loader = BloodPressureData(FileFormat.IOS_BLOOD_PRESSURE_EXPORT)
     assert len(loader.records) == 0
+
+
+# pylint: disable=unused-argument
+def test_blood_pressure_data_loader_dataframe_generate(no_file_format_env):
+    """
+    Test generating a pandas dataframe from test data
+    """
+    loader = BloodPressureData(FileFormat.IOS_BLOOD_PRESSURE_EXPORT)
+    loader.records.load(VALID_IOS_DATA_FILE)
+    assert len(loader.records) == VALID_IOS_DATA_RECORD_COUNT
+
+    dataframe = loader.dataframe
+    assert list(dataframe.columns) == list(DATAFRAME_COLUMNS)
+    for column in DATAFRAME_COLUMNS:
+        assert len(dataframe[column]) == VALID_IOS_DATA_RECORD_COUNT

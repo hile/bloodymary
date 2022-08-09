@@ -5,7 +5,9 @@ import os
 
 from typing import Optional
 
-from ..constants import BLOODYMARY_FILE_FORMAT_ENV_VAR, FileFormat
+import pandas
+
+from ..constants import BLOODYMARY_FILE_FORMAT_ENV_VAR, DATAFRAME_COLUMNS, FileFormat
 from ..exceptions import ConfigurationError
 
 from .ios_blood_pressure import IosBloodPressureExportFile
@@ -39,3 +41,17 @@ class BloodPressureData:
             file_format = get_file_format(file_format)
         self.file_format = file_format
         self.records = FILE_FORMAT_LOADERS[self.file_format]()
+
+    @property
+    def dataframe(self):
+        """
+        Return a pandas dataframe for the measurement records
+        """
+        data = {}
+        for column in DATAFRAME_COLUMNS:
+            attr = column.lower()
+            data[column] = [
+                getattr(measurement, attr)
+                for measurement in self.records
+            ]
+        return pandas.DataFrame(data, columns=DATAFRAME_COLUMNS)

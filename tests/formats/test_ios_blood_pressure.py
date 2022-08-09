@@ -8,10 +8,7 @@ import pytest
 
 from bloodymary.formats.ios_blood_pressure import IosBloodPressureExportFile
 
-from ..conftest import MOCK_DATA, EMPTY_FILE
-
-VALID_DATA_FILE = MOCK_DATA.joinpath('formats/ios_blood_pressure.txt')
-VALID_DATA_RECORD_COUNT = 4
+from ..conftest import MOCK_DATA, EMPTY_FILE, VALID_IOS_DATA_FILE, VALID_IOS_DATA_RECORD_COUNT
 
 # Test file with an unexpected data field
 UNEXPECTED_FIELD_DATA_FILE = MOCK_DATA.joinpath('formats/ios_blood_pressure_unexpected_field.txt')
@@ -73,5 +70,5 @@ def test_formats_ios_blood_pressure_load_valid_file():
     Test loading a valid text file for IoS Blood Pressure app exports
     """
     obj = IosBloodPressureExportFile()
-    obj.load(VALID_DATA_FILE)
-    assert len(obj) == VALID_DATA_RECORD_COUNT
+    obj.load(VALID_IOS_DATA_FILE)
+    assert len(obj) == VALID_IOS_DATA_RECORD_COUNT

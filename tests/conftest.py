@@ -15,6 +15,9 @@ from bloodymary.measurement import Measurement
 MOCK_DATA = Path(__file__).parent.joinpath('mock')
 EMPTY_FILE = MOCK_DATA.joinpath('formats/empty_file.txt')
 
+VALID_IOS_DATA_FILE = MOCK_DATA.joinpath('formats/ios_blood_pressure.txt')
+VALID_IOS_DATA_RECORD_COUNT = 4
+
 INVALID_FILE_FORMAT_NAME = 'this-is-wrong'
 
 
