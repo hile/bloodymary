@@ -3,24 +3,38 @@ name = "bloodymary"
 version = "0.3.0"
 description = "Utility for parsing and processing blood pressure measurements"
 authors = ["Ilkka Tuohela <hile@iki.fi>"]
-license = "PSF"
+readme = "README.md"
+include = [
+    "LICENSE",
+]
+license = "BSD"
+classifiers = [
+    "Environment :: Console",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Utilities",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-cli-toolkit = "^2.1.5"
-pandas = "^1.4.3"
-matplotlib = "^3.5.2"
+cli-toolkit = "^2"
+pandas = "^1.4"
+matplotlib = "^3.5"
 
-[tool.poetry.dev-dependencies]
-coverage = "^6.1"
-flake8 = "^5.0"
+[tool.poetry.group.dev.dependencies]
+coverage = "^7"
+flake8 = "^6"
 flake8-bugbear = "^22"
-flake8-quotes = "^3.3"
-pycodestyle = "^2.8"
-pyflakes = "^2.4"
+flake8-quotes = "^3"
+pycodestyle = "^2"
+pyflakes = "^3"
 pylint = "^2"
-pytest = "^7.1"
-tox = "^3"
+pytest = "^7"
+tox = "^4"
 
 [tool.poetry.scripts]
 bloodymary = "bloodymary.bin.bloodymary:main"
